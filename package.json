@@ -1,5 +1,20 @@
 {
-  "dependencies": {
-    "puppeteer": "^21.1.1"
-  }
+  "name": "generate-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacedeve/generate-pdf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spacedeve/generate-pdf/issues"
+  },
+  "homepage": "https://github.com/spacedeve/generate-pdf#readme"
 }
