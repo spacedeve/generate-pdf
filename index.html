@@ -4,16 +4,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Form</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 </head>
 
 <body>
-    <form id="myForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br><br>
-        <input type="submit" value="Submit">
+    <form id="userInfoForm">
+        <div class="row">
+            <div class="small-12 large-3 columns">
+                <p>Form <strong>W-9</strong><br>
+                    (Rev. December 2014)<br>
+                    Department of the Treasury<br>
+                    Internal Revenue Service</p>
+            </div>
+            <div class="small-12 large-6 columns">
+                <h2 align="center">Request for Taxpayer Identification Number and Certification</h2>
+            </div>
+            <div class="small-12 large-3 columns">
+                <p>Give Form to the requester. <br>
+                    Do not send to the IRS.</p>
+            </div>
+        </div>
+        <hr />
+        <fieldset>
+            <legend>1</legend>
+            <div class="row">
+                <label>Name (as shown on your income tax return). Name is required on this line; do not leave this line blank.</label>
+                <input name="name" id="name" type="text" class="custom-input required" data-required="required" required>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>2</legend>
+            <div class="row">
+                <label>Business name/disregarded entity name, if different from above</label>
+                <input name="business-name" id="business-name" type="text" class="custom-input" required>
+            </div>
+            <p>Check appropriate box for federal tax classification: </p>
+            <fieldset>
+                <legend>3</legend>
+                <div class="row">
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="Individual/sole proprietor or single-member LLC" class="custom-input">
+                            Individual/sole proprietor or single-member LLC</label>
+                    </div>
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="C Corporation" class="custom-input">
+                            C Corporation</label>
+                    </div>
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="S Corporation" class="custom-input">
+                            S Corporation</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="Partnership" class="custom-input">
+                            Partnership</label>
+                    </div>
+                    <div class="small-12 large-4 columns end">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="Trust/estate" class="custom-input">
+                            Trust/estate</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="Limited liability company" class="custom-input">
+                            Limited liability company</label>
+                    </div>
+                    <div class="small-12 large-8 columns">
+                        <label>Enter the tax classification ▶
+                            <select name="tax-classification" id="tax-classification" class="custom-input" required>
+                                <option value="C">C corporation</option>
+                                <option value="S">S corporation</option>
+                                <option value="P">Partnership</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <strong>Note.</strong> For a single-member LLC that is disregarded, do not check LLC; check the appropriate box in the line above for
+                        the tax classification of the single-member owner.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12 large-4 columns">
+                        <label>
+                            <input name="federal-tax-classification" type="radio" value="Other" class="custom-input">
+                            Other</label>
+                    </div>
+                    <div class="small-12 large-8 columns">
+                        <label>(<a href="#Other_entities">see instructions below</a>) ▶
+                            <input name="other-federal-tax-classification" id="other-federal-tax-classification" type="text" class="custom-input" /></label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>4</legend>
+                <div class="row">
+                    <div class="small-12 large-6 columns">
+                        Exemptions (codes apply only to certain entities, not individuals; see instructions on page 3):
+                        <label>Exempt payee code (if any)
+                            <select name="exempt-payee-code" id="exempt-payee-code" required>
+                                <option value="" selected></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="small-12 large-6 columns">
+                        Exemptions (codes apply only to certain entities, not individuals; see instructions on page 3):
+                        <label>Exemption from FATCA reporting code (if any)
+                            <select name="exemption-from-fatca-reporting-code" id="exemption-from-fatca-reporting-code" required>
+                                <option value="" selected></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                            </select>
+                        </label>
+                        <em>(Applies to accounts maintained outside the U.S.)</em>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>5</legend>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>Address (number, street, and apt. or suite no.)</label>
+                        <input name="address" id="address" type="text" class="custom-input" data-required="required" required>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>6</legend>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>City, state, and ZIP code</label>
+                        <input name="city-state-zip-code" id="city-state-zip-code" type="text" class="custom-input" data-required="required" required>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>Requester’s name and address (optional)</label>
+                        <input class="placeholder-text-area" height="75" name="requester’s-name-and-address">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>7</legend>
+                <div class="row">
+                    <div class="small-12 large-12 columns">
+                        <label>List account number(s) here (optional)</label>
+                        <input name="account-numbers" id="account-numbers" type="text" class="custom-input">
+                    </div>
+                </div>
+            </fieldset>
+            <h3><strong>Part I</strong> Taxpayer Identification Number (TIN)</h3>
+            <div class="row">
+                <div class="small-12 large-6 columns">
+                    <p>Enter your TIN in the appropriate box. The TIN provided must match the name given on the “Name” line to avoid backup withholding. For individuals, this is your social security number (SSN). However, for a resident alien, sole proprietor, or disregarded entity, see the Part I instructions on page 3. For other entities, it is your employer identification number (EIN). If you do not have a number, see How to get a TIN on page 3.</p>
+                    <p><strong>Note.</strong> If the account is in more than one name, see the chart on page 4 for guidelines on whose number to enter.</p>
+                </div>
+                <div class="small-12 large-6 columns">
+                    <div class="row">
+                        <label>Social security number:</label>
+                        <input name="Social security number" type="ssn" required>
+                    </div>
+                    <div class="row">
+                        <label>Employer identification number:</label>
+                        <input name="Employer identification number" type="ein" required>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <h3> <strong>Part II</strong> Certification</h3>
+            <p>Under penalties of perjury, I certify that:</p>
+            <p>1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me), and</p>
+            <p>2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding, and</p>
+            <p>3. I am a U.S. citizen or other U.S. person (defined below).</p>
+            <p><strong>Certification instructions. </strong>You must cross out item 2 above if you have been notified by the IRS that you are currently subject to backup withholding because you have failed to report all interest and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage interest paid, acquisition or abandonment of secured property, cancellation of debt, contributions to an individual retirement arrangement (IRA), and generally, payments other than interest and dividends, you are not required to sign the certification, but you must provide your correct TIN. <a href="#Part_II_Certification">See the instructions below</a>.</p>
+            <input class="btn btn-primary" type="submit" value="Submit">
     </form>
     <script src="script.js"></script>
 </body>

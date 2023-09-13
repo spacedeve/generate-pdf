@@ -20,23 +20,7 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/processFormData', async (req, res) => {
-    const { name, email } = req.body;
 
-    const pdfBytes = fs.readFileSync('example.pdf'); // Replace with your PDF file
-
-    const pdfDoc = await PDFDocument.load(pdfBytes);
-    const form = pdfDoc.getForm();
-
-    form.getTextFieldOrNull('name').setText(name);
-    form.getTextFieldOrNull('email').setText(email);
-
-    const modifiedPdfBytes = await pdfDoc.save();
-
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=modified.pdf');
-    res.send(modifiedPdfBytes);
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
